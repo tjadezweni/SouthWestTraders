@@ -1,15 +1,15 @@
 <h1 align="center">South West Traders</h1> <br>
 
 ## Table Of Contents
-- [Project Overview](#books-Project-Description)
-- [Project Management](#clipboard-Project-Management)
-- [Git Structure](#gear-Git-Structure)
+- [Project Description](#books-project-description)
+- [Project Management](#clipboard-project-management)
+- [Git Structure](#gear-git-structure)
 
 ## :books: Project Description
 
-South West Traders API, is a api meant to help South West Traders to manage
-their catalogue, view them, search them, and place orders, reserve the, complete, 
-and cancel them.
+South West Traders API, is an api meant to fit the requirement of the fictious company
+South West Traders to manage their catalogue, view them, search them, and place orders, 
+reserve the, complete, and cancel them.
 
 ## :clipboard: Project Management
 
@@ -19,32 +19,25 @@ and cancel them.
 
 ### Branching Strategy
 
-- master (build)
-<br>
+master (build)
+</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- develop (build)
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-feature-featureName 
-<br>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- feature/featureName 
+</br>
 
-### : Commit Prefixes
+### Commit Prefixes
 
 Each commit follows the pattern: (type): (subject)
 where:
 
-- type:
-&nbsp;&nbsp;- feat: new feature implementation
-<br>
-&nbsp;&nbsp;- refactor: changes to "production" code
-<br>
-&nbsp;&nbsp;- style: changes to code formatting
-<br>
-&nbsp;&nbsp;- fix: bug fixes
-<br>
-&nbsp;&nbsp;- test: adding or refactoring of tests
-<br>
-&nbsp;&nbsp;- docs: adding or changes to documentation
-<br>
-&nbsp;&nbsp;- chore: updating grunt tasks. No production code changes
-<br>
+* type:
+   * feat: new feature implementation
+   * refactor: changes to "production" code
+   * style: changes to code formatting
+   * fix: bug fixes
+   * test: adding or refactoring of tests
+   * docs: adding or changes to documentation
+   * chore: updating grunt tasks. No production code changes
 
-- subject: Summary of the task that was done in present tense
+* subject: Summary of the task that was done (written in the present tense)
