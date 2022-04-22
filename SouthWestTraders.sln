@@ -5,7 +5,15 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{3724D670-7207-4F61-BA22-49FFE3A578D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SouthWestTraders.Web", "SouthWestTraders.Web\SouthWestTraders.Web.csproj", "{F93F7E69-692A-42CD-872C-8BC4BA3525E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SouthWestTraders", "main\SouthWestTraders\SouthWestTraders.csproj", "{09E7B9A6-D866-4ECB-88CB-7B58D77D4C8B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SouthWestTraders.Web", "main\SouthWestTraders.Web\SouthWestTraders.Web.csproj", "{ADCF089E-A4BC-4F8F-8ABA-BF18F004A3C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SouthWestTraders.Contracts", "main\SouthWestTraders.Contracts\SouthWestTraders.Contracts.csproj", "{F43C6085-B6E8-4E08-A7B2-09422E51DE5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{021A0962-E4E1-471B-BB57-9DBCD6AE7CC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SouthWestTraders.UnitTests", "tests\SouthWestTraders.UnitTests\SouthWestTraders.UnitTests.csproj", "{E8066D9C-3743-4D1D-8D0A-3079B58BE353}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +21,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F93F7E69-692A-42CD-872C-8BC4BA3525E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F93F7E69-692A-42CD-872C-8BC4BA3525E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F93F7E69-692A-42CD-872C-8BC4BA3525E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F93F7E69-692A-42CD-872C-8BC4BA3525E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09E7B9A6-D866-4ECB-88CB-7B58D77D4C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09E7B9A6-D866-4ECB-88CB-7B58D77D4C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09E7B9A6-D866-4ECB-88CB-7B58D77D4C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09E7B9A6-D866-4ECB-88CB-7B58D77D4C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADCF089E-A4BC-4F8F-8ABA-BF18F004A3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADCF089E-A4BC-4F8F-8ABA-BF18F004A3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADCF089E-A4BC-4F8F-8ABA-BF18F004A3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADCF089E-A4BC-4F8F-8ABA-BF18F004A3C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F43C6085-B6E8-4E08-A7B2-09422E51DE5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F43C6085-B6E8-4E08-A7B2-09422E51DE5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F43C6085-B6E8-4E08-A7B2-09422E51DE5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F43C6085-B6E8-4E08-A7B2-09422E51DE5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8066D9C-3743-4D1D-8D0A-3079B58BE353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8066D9C-3743-4D1D-8D0A-3079B58BE353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8066D9C-3743-4D1D-8D0A-3079B58BE353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8066D9C-3743-4D1D-8D0A-3079B58BE353}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F93F7E69-692A-42CD-872C-8BC4BA3525E4} = {3724D670-7207-4F61-BA22-49FFE3A578D0}
+		{09E7B9A6-D866-4ECB-88CB-7B58D77D4C8B} = {3724D670-7207-4F61-BA22-49FFE3A578D0}
+		{ADCF089E-A4BC-4F8F-8ABA-BF18F004A3C3} = {3724D670-7207-4F61-BA22-49FFE3A578D0}
+		{F43C6085-B6E8-4E08-A7B2-09422E51DE5B} = {3724D670-7207-4F61-BA22-49FFE3A578D0}
+		{E8066D9C-3743-4D1D-8D0A-3079B58BE353} = {021A0962-E4E1-471B-BB57-9DBCD6AE7CC0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D299827C-65AC-46CF-B005-7F0CB45F58C6}
