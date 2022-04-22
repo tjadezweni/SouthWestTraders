@@ -17,6 +17,12 @@ reserve the, complete, and cancel them.
 
 ## :gear: Git Structure
 
+### Code Quality
+
+#### Builds and Testing
+
+[![.NET Core API](https://github.com/tjadezweni/SouthWestTraders/actions/workflows/dotnet.yml/badge.svg)](https://github.com/tjadezweni/SouthWestTraders/actions/workflows/dotnet.yml)
+
 ### Branching Strategy
 
 master (build)
