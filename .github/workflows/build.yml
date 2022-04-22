@@ -25,9 +25,9 @@ jobs:
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: ${{env.DOTNET_VERSION}}
-          include-prerelease: true
+      with:
+        dotnet-version: ${{env.DOTNET_VERSION}}
+        include-prerelease: true
 
     - name: Install dependencies
       run: dotnet restore
