@@ -1,39 +1,39 @@
 name: Build & Test
 
 on:
- push:
-  branches: [main, develop]
-  paths: ['**.cs', '**.csproj']
- pull_request:
-  branches: [main, develop]
-  paths: ['**.cs', '**.csproj']
+  push:
+    branches: [main, develop]
+    paths: ['**.cs', '**.csproj']
+  pull_request:
+    branches: [main, develop]
+    paths: ['**.cs', '**.csproj']
 
 env:
-	DOTNET_VERSION: '6.0.x'
+  DOTNET_VERSION: '6.0.x'
 
 jobs:
-	build-and-test:
-		name: Build and Test on ${{matrix.os}}
-		runs-on: ${{matrix.os}}
-		strategy:
-			matrix:
-				os: [ubuntu-latest, windows-latest, macOS-latest]
+  build-and-test:
+    name: Build and Test on ${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 		
-		steps:
-		- name: Checkout code
-		 uses: actions/checkout@v3
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-		- name: Setup .NET Core
-		  uses: actions/setup-dotnet@v2
-		  with:
-			dotnet-version: ${{env.DOTNET_VERSION}}
-			include-prerelease: true
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{env.DOTNET_VERSION}}
+          include-prerelease: true
 
-		- name: Install dependencies
-		  run: dotnet restore
+    - name: Install dependencies
+      run: dotnet restore
 
-		- name: Build
-		  run: dotnet build --configuration Release --no-restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
 
-		- name: Test
-		  run: dotnet test --no-restore --verbosity normal
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
