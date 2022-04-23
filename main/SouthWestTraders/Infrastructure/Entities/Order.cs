@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SouthWestTraders.Infrastructure.Entities
+﻿namespace SouthWestTraders.Infrastructure.Entities
 {
     public partial class Order
     {
