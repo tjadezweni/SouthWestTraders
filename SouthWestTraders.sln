@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SouthWestTraders.Contracts"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{021A0962-E4E1-471B-BB57-9DBCD6AE7CC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SouthWestTraders.UnitTests", "tests\SouthWestTraders.UnitTests\SouthWestTraders.UnitTests.csproj", "{E8066D9C-3743-4D1D-8D0A-3079B58BE353}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SouthWestTraders.UnitTests", "tests\SouthWestTraders.UnitTests\SouthWestTraders.UnitTests.csproj", "{E8066D9C-3743-4D1D-8D0A-3079B58BE353}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AEF6ACDD-88CC-43F4-B548-F1D1C6F636FA}"
+	ProjectSection(SolutionItems) = preProject
+		db_creation_scripts.sql = db_creation_scripts.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
