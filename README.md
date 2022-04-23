@@ -45,5 +45,6 @@ where:
    * test: adding or refactoring of tests
    * docs: adding or changes to documentation
    * chore: updating grunt tasks. No production code changes
+   * setup: initial project setup
 
 * subject: Summary of the task that was done (written in the present tense)
