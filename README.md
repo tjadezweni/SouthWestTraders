@@ -17,6 +17,12 @@ reserve the, complete, and cancel them.
 
 ## :gear: Git Structure
 
+### Code Quality
+
+#### Builds and Testing
+
+[![.NET Core API](https://github.com/tjadezweni/SouthWestTraders/actions/workflows/dotnet.yml/badge.svg)](https://github.com/tjadezweni/SouthWestTraders/actions/workflows/dotnet.yml)
+
 ### Branching Strategy
 
 master (build)
@@ -39,5 +45,6 @@ where:
    * test: adding or refactoring of tests
    * docs: adding or changes to documentation
    * chore: updating grunt tasks. No production code changes
+   * setup: initial project setup
 
 * subject: Summary of the task that was done (written in the present tense)
