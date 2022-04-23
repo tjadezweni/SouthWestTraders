@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SouthWestTraders.Infrastructure.Entities;
+using Application.Infrastructure.Entities;
 
-namespace SouthWestTraders.Infrastructure
+namespace Application.Infrastructure
 {
     public partial class SouthWestTradersDBContext : DbContext
     {

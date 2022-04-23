@@ -1,6 +1,8 @@
-﻿namespace SouthWestTraders.Infrastructure.Entities
+﻿using Application.Infrastructure.SeedWork;
+
+namespace Application.Infrastructure.Entities
 {
-    public partial class Product
+    public partial class Product : BaseEntity
     {
         public Product()
         {

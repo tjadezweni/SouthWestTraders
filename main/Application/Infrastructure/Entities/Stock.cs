@@ -1,6 +1,8 @@
-﻿namespace SouthWestTraders.Infrastructure.Entities
+﻿using Application.Infrastructure.SeedWork;
+
+namespace Application.Infrastructure.Entities
 {
-    public partial class Stock
+    public partial class Stock : BaseEntity
     {
         public int StockId { get; set; }
         public int ProductId { get; set; }
