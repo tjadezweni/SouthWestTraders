@@ -124,7 +124,7 @@ namespace Application.UnitTests.Repositories
 
             // Assert
             Assert.NotNull(productList);
-            Assert.Equal(0, productList.Count);
+            Assert.Empty(productList);
         }
     }
 }

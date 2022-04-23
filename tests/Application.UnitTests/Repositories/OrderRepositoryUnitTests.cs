@@ -124,7 +124,7 @@ namespace Application.UnitTests.Repositories
 
             // Assert
             Assert.NotNull(orderList);
-            Assert.Equal(0, orderList.Count);
+            Assert.Empty(orderList);
         }
 
 

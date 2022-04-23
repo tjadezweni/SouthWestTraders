@@ -117,7 +117,7 @@ namespace Application.UnitTests.Repositories
 
             // Assert
             Assert.NotNull(orderStateList);
-            Assert.Equal(0, orderStateList.Count);
+            Assert.Empty(orderStateList);
         }
     }
 }

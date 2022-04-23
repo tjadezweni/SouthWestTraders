@@ -122,7 +122,7 @@ namespace Application.UnitTests.Repositories
 
             // Assert
             Assert.NotNull(stockList);
-            Assert.Equal(0, stockList.Count);
+            Assert.Empty(stockList);
         }
     }
 }
