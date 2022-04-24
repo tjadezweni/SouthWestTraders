@@ -1,6 +1,7 @@
 ﻿using Application.Features.AddProducts;
 using Application.Infrastructure.Entities;
 using Application.Infrastructure.Repositories.Products;
+using Application.Infrastructure.Repositories.Stocks;
 using Moq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,13 +20,15 @@ namespace Application.UnitTests.Features.AddProducts
             var command = new AddProduct.Command { Name = name, Description = description, Price = price };
             var cancellationToken = new CancellationToken();
             var mockProductRepository = new Mock<IProductRepository>();
-            var handler = new AddProduct.Handler(mockProductRepository.Object);
+            var mockStockRepository = new Mock<IStockRepository>();
+            var handler = new AddProduct.Handler(mockProductRepository.Object, mockStockRepository.Object);
 
             // Act
             var product = await handler.Handle(command, cancellationToken);
 
             // Assert
             mockProductRepository.Verify(mock => mock.AddAsync(It.IsAny<Product>()), Times.Once());
+            mockStockRepository.Verify(mock => mock.AddAsync(It.IsAny<Stock>()), Times.Once());
             Assert.NotNull(product);
             Assert.Same(name, product.Name);
             Assert.Same(description, product.Description);
