@@ -7,7 +7,7 @@ namespace Application.Features.SearchProductsByName
 {
     public static class SearchProductByName
     {
-        public record Query : IRequest<ProductDto?>
+        public record Query : IRequest<ProductDto>
         {
             public string Name { get; set; } = null!;
         }
