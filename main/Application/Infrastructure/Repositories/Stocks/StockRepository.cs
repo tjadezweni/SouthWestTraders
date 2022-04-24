@@ -10,5 +10,10 @@ namespace Application.Infrastructure.Repositories.Stocks
         {
 
         }
+
+        public async Task<Stock?> GetStockWithProductId(int productId)
+        {
+            return _dbSet.Where(stock => stock.ProductId == productId).FirstOrDefault();
+        }
     }
 }

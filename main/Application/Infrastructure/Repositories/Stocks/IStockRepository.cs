@@ -5,6 +5,6 @@ namespace Application.Infrastructure.Repositories.Stocks
 {
     public interface IStockRepository : IAsyncRepository<Stock>
     {
-
+        public Task<Stock?> GetStockWithProductId(int productId);
     }
 }
