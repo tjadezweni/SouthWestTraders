@@ -26,8 +26,4 @@
     <ProjectReference Include="..\..\main\Application\Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\IncreaseStocks\" />
-  </ItemGroup>
-
 </Project>
