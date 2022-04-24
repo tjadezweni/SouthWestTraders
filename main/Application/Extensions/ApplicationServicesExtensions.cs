@@ -4,8 +4,6 @@ using Application.Infrastructure.Repositories.OrderStates;
 using Application.Infrastructure.Repositories.Products;
 using Application.Infrastructure.Repositories.Stocks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Application.Extensions
 {
