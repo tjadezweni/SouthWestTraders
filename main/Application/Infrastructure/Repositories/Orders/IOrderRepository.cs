@@ -6,5 +6,6 @@ namespace Application.Infrastructure.Repositories.Orders
     public interface IOrderRepository : IAsyncRepository<Order>
     {
         Task<Order?> GetOrderWithOrderState(int orderId);
+        Task<Order?> SearchOrderByName(string name);
     }
 }

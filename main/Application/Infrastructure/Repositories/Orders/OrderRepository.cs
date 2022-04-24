@@ -18,5 +18,12 @@ namespace Application.Infrastructure.Repositories.Orders
                 .Where(order => order.OrderId == orderId)
                 .FirstOrDefaultAsync();
         }
+
+        public Task<Order?> SearchOrderByName(string name)
+        {
+            return _dbSet.Include(order => order.OrderState)
+                .Where(order => order.Name.ToLower().Contains(name))
+                .FirstOrDefaultAsync();
+        }
     }
 }
