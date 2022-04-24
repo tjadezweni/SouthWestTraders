@@ -1,5 +1,6 @@
 ﻿using Application.Infrastructure.Entities;
 using Application.Infrastructure.SeedWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Infrastructure.Repositories.Orders
 {
@@ -9,6 +10,13 @@ namespace Application.Infrastructure.Repositories.Orders
             : base(dbContext)
         {
 
+        }
+
+        public Task<Order?> GetOrderWithOrderState(int orderId)
+        {
+            return _dbSet.Include(order => order.OrderState)
+                .Where(order => order.OrderId == orderId)
+                .FirstOrDefaultAsync();
         }
     }
 }
