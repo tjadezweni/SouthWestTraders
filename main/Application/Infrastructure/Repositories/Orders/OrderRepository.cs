@@ -19,6 +19,13 @@ namespace Application.Infrastructure.Repositories.Orders
                 .FirstOrDefaultAsync();
         }
 
+        public Task<Order?> SearchOrderByDate(DateTime date)
+        {
+            return _dbSet.Include(order => order.OrderState)
+                .Where(order => order.CreatedDateUtc == date)
+                .FirstOrDefaultAsync();
+        }
+
         public Task<Order?> SearchOrderByName(string name)
         {
             return _dbSet.Include(order => order.OrderState)
