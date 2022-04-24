@@ -37,12 +37,12 @@ namespace Application.Infrastructure.SeedWork
 
         public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> expression)
         {
-            return await _dbSet.FirstOrDefaultAsync(expression);
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(expression);
         }
 
         public async Task<List<TEntity>> ListAsync(Expression<Func<TEntity, bool>> expression)
         {
-            return await _dbSet.Where(expression).ToListAsync();
+            return await _dbSet.AsNoTracking().Where(expression).ToListAsync();
         }
     }
 }
