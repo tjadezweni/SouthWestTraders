@@ -2,8 +2,8 @@
 {
     public class ProductNotFoundException : NotFoundException
     {
-        public ProductNotFoundException(int productId)
-            : base("Product", productId)
+        public ProductNotFoundException(object productProperty)
+            : base("Product", productProperty)
         {
 
         }

@@ -22,7 +22,7 @@ namespace Application.UnitTests.Features.RemoveProducts
             var command = new RemoveProduct.Command { ProductId = productId };
             var mockProductRepository = new Mock<IProductRepository>();
             mockProductRepository.Setup(mock => mock.GetAsync(It.IsAny<Expression<Func<Product, bool>>>()))
-                .Returns(Task.FromResult<Product?>(new Product()));
+                .ReturnsAsync(new Product());
             var cancellationToken = new CancellationToken();
             var handler = new RemoveProduct.Handler(mockProductRepository.Object);
 
@@ -42,7 +42,7 @@ namespace Application.UnitTests.Features.RemoveProducts
             var command = new RemoveProduct.Command { ProductId = productId };
             var mockProductRepository = new Mock<IProductRepository>();
             mockProductRepository.Setup(mock => mock.GetAsync(It.IsAny<Expression<Func<Product, bool>>>()))
-                .Returns(Task.FromResult<Product?>(null));
+                .ReturnsAsync(null as Product);
             var cancellationToken = new CancellationToken();
             var handler = new RemoveProduct.Handler(mockProductRepository.Object);
 

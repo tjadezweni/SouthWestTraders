@@ -2,15 +2,15 @@
 {
     public class NotFoundException : Exception
     {
-        protected NotFoundException(string entityType, int entityId)
-            : base(DefaultMessage(entityType, entityId))
+        protected NotFoundException(string entityType, object entityProperty)
+            : base(DefaultMessage(entityType, entityProperty))
         {
 
         }
 
-        private static string DefaultMessage(string entityType, int entityId)
+        private static string DefaultMessage(string entityType, object entityProperty)
         {
-            return $"The {entityType} with id: {entityId} was not found.";
+            return $"The {entityType} with id/name: {entityProperty} was not found.";
         }
     }
 }
