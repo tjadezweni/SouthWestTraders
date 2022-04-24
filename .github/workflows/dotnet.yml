@@ -9,11 +9,8 @@ on:
 jobs:
   build:
   
-    name: build-and-test-${{matrix.os}}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    name: build-and-test-ubuntu-latest
+    runs-on: ubuntu-latest
         
     steps:
     - uses: actions/checkout@v3
