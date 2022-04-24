@@ -11,7 +11,7 @@ namespace Application.Infrastructure.SeedWork
 
         public Task DeleteAsync(TEntity entity);
 
-        public Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression);
+        public Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> expression);
 
         public Task<List<TEntity>> ListAsync(Expression<Func<TEntity, bool>> expression);
     }

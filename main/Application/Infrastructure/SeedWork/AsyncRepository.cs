@@ -35,7 +35,7 @@ namespace Application.Infrastructure.SeedWork
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> expression)
         {
             return await _dbSet.FirstOrDefaultAsync(expression);
         }
