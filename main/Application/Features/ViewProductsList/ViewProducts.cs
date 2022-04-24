@@ -2,7 +2,7 @@
 using Application.Infrastructure.Repositories.Products;
 using MediatR;
 
-namespace Application.Features.ViewProducts
+namespace Application.Features.ViewProductsList
 {
     public static class ViewProducts
     {

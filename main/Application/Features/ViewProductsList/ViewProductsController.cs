@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Application.Features.ViewProducts
+namespace Application.Features.ViewProductsList
 {
     [Route("api/products")]
     [ApiController]
