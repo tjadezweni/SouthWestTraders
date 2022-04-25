@@ -26,13 +26,6 @@ namespace Application.Infrastructure.Repositories.Orders
                 .FirstOrDefaultAsync();
         }
 
-        public Task<Order?> SearchOrderByDate(DateTime date)
-        {
-            return _dbSet.Include(order => order.OrderState)
-                .Where(order => order.CreatedDateUtc == date)
-                .FirstOrDefaultAsync();
-        }
-
         public Task<Order?> SearchOrderByName(string name)
         {
             return _dbSet.Include(order => order.OrderState)
@@ -40,11 +33,11 @@ namespace Application.Infrastructure.Repositories.Orders
                 .FirstOrDefaultAsync();
         }
 
-        public Task<List<Order>> SearchOrdersByDate(DateOnly dateOnly)
+        public Task<List<Order>> SearchOrdersByDate(int day, int month, int year)
         {
             return _dbSet.Include(order => order.OrderState)
-                .Where(order => order.CreatedDateUtc.Day == dateOnly.Day && 
-                order.CreatedDateUtc.Month == dateOnly.Month && order.CreatedDateUtc.Year == dateOnly.Year)
+                .Where(order => order.CreatedDateUtc.Day == day && 
+                order.CreatedDateUtc.Month == month && order.CreatedDateUtc.Year == year)
                 .ToListAsync();
         }
     }

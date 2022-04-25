@@ -1,4 +1,5 @@
-﻿using Application.Features.ViewOrders;
+﻿using Application.ActionFilters;
+using Application.Features.ViewOrders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -18,9 +19,10 @@ namespace Application.Features.SearchOrderByDate
         [HttpGet("search/date", Name = "SearchOrdersById")]
         [SwaggerOperation(Summary = "Searches for orders that occurred on a specific date")]
         [SwaggerResponse(StatusCodes.Status200OK, "Request Successful", typeof(List<OrderDto>))]
-        public async Task<IActionResult> SearchOrderByDate([FromQuery] DateOnly date)
+
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        public async Task<IActionResult> SearchOrderByDate([FromQuery] SearchOrdersByDate.Query query)
         {
-            var query = new SearchOrdersByDate.Query { CreatedDate = date };
             var product = await _mediator.Send(query);
             return Ok(product);
         }
