@@ -31,20 +31,3 @@ master (build)
 </br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- feature/featureName 
 </br>
-
-### Commit Prefixes
-
-Each commit follows the pattern: (type): (subject)
-where:
-
-* type:
-   * feat: new feature implementation
-   * refactor: changes to "production" code
-   * style: changes to code formatting
-   * fix: bug fixes
-   * test: adding or refactoring of tests
-   * docs: adding or changes to documentation
-   * chore: updating grunt tasks. No production code changes
-   * setup: initial project setup
-
-* subject: Summary of the task that was done (written in the present tense)
