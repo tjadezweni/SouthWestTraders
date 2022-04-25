@@ -23,11 +23,10 @@ namespace Application.Features.SearchProductsByName
 
             public async Task<ProductDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var searchName = request.Name.ToLower();
-                var product = await _productRepository.GetAsync(product => product.Name.ToLower().Contains(searchName));
+                var product = await _productRepository.SearchProductByName(request.Name);
                 if (product is null)
                 {
-                    throw new ProductNotFoundException(searchName);
+                    throw new ProductNotFoundException(request.Name);
                 }
                 var productDto = new ProductDto { ProductId = product.ProductId, Name = product.Name, 
                     Description = product.Description, Price = product.Price };

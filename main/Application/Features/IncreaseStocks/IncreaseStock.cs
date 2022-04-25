@@ -1,5 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Infrastructure.Repositories.Stocks;
+using Application.Infrastructure.SeedWork;
 using MediatR;
 
 namespace Application.Features.IncreaseStocks
@@ -15,10 +16,13 @@ namespace Application.Features.IncreaseStocks
         public class Handler : IRequestHandler<Command>
         {
             private readonly IStockRepository _stockRepository;
+            private readonly IUnitOfWork _unitOfWork;
 
-            public Handler(IStockRepository stockRepository)
+            public Handler(IStockRepository stockRepository,
+                IUnitOfWork unitOfWork)
             {
                 _stockRepository = stockRepository;
+                _unitOfWork = unitOfWork;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
@@ -31,6 +35,7 @@ namespace Application.Features.IncreaseStocks
                 int newStockAmount = stock.AvailableStock + request.StockAmount;
                 stock.AvailableStock = newStockAmount;
                 await _stockRepository.UpdateAsync(stock);
+                await _unitOfWork.CompleteAsync();
                 return Unit.Value;
             }
         }

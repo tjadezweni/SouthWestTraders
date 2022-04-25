@@ -18,21 +18,18 @@ namespace Application.Infrastructure.SeedWork
         public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
             return entity;
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             _dbSet.Update(entity);
-            await _dbContext.SaveChangesAsync();
             return await Task.FromResult(entity);
         }
 
         public async Task DeleteAsync(TEntity entity)
         {
             _dbSet.Remove(entity);
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> expression)

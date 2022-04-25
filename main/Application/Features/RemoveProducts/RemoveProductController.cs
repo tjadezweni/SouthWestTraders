@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.RemoveProducts
 {
@@ -13,7 +14,10 @@ namespace Application.Features.RemoveProducts
             _mediator = mediator;
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:int}", Name = "RemoveProduct")]
+        [SwaggerOperation(Summary = "Removes a product to the warehouse")]
+        [SwaggerResponse(StatusCodes.Status204NoContent, "Request Successful")]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Product (to be deleted) was not found")]
         public async Task<IActionResult> RemoveProduct(int id)
         {
             var command = new RemoveProduct.Command { ProductId = id };

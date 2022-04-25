@@ -24,7 +24,7 @@ namespace Application.Infrastructure
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=SouthWestTradersDB;Trusted_Connection=true;");
+                optionsBuilder.UseSqlServer("Server=.;Database=SouthWestTradersDB;Trusted_Connection=True;");
             }
         }
 
@@ -33,6 +33,9 @@ namespace Application.Infrastructure
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("Order");
+
+                entity.HasIndex(e => e.Name, "UQ__Order__737584F6652007FA")
+                    .IsUnique();
 
                 entity.Property(e => e.CreatedDateUtc)
                     .HasColumnType("datetime")
@@ -45,12 +48,12 @@ namespace Application.Infrastructure
                 entity.HasOne(d => d.OrderState)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.OrderStateId)
-                    .HasConstraintName("FK__Order__OrderStat__49C3F6B7");
+                    .HasConstraintName("FK__Order__OrderStat__693CA210");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__Order__ProductId__47DBAE45");
+                    .HasConstraintName("FK__Order__ProductId__6754599E");
             });
 
             modelBuilder.Entity<OrderState>(entity =>
@@ -65,6 +68,9 @@ namespace Application.Infrastructure
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("Product");
+
+                entity.HasIndex(e => e.Name, "UQ__Product__737584F691F244F6")
+                    .IsUnique();
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(50)
@@ -84,7 +90,7 @@ namespace Application.Infrastructure
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Stocks)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__Stock__ProductId__440B1D61");
+                    .HasConstraintName("FK__Stock__ProductId__628FA481");
             });
 
             OnModelCreatingPartial(modelBuilder);

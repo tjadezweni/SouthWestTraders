@@ -3,6 +3,7 @@ using Application.Infrastructure.Repositories.Orders;
 using Application.Infrastructure.Repositories.OrderStates;
 using Application.Infrastructure.Repositories.Products;
 using Application.Infrastructure.Repositories.Stocks;
+using Application.Infrastructure.SeedWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Extensions
@@ -22,8 +23,9 @@ namespace Application.Extensions
 
         public static void RegisterRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IStockRepository, StockRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderStateRepository, OrderStateRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
         }

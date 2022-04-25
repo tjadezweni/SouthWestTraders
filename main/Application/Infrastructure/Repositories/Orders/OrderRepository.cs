@@ -12,6 +12,13 @@ namespace Application.Infrastructure.Repositories.Orders
 
         }
 
+        public async Task<Order?> GetOrderByIdEager(int orderId)
+        {
+            return await _dbSet.Include(order => order.OrderState)
+                .Where(order => order.OrderId == orderId)
+                .FirstOrDefaultAsync();
+        }
+
         public Task<Order?> GetOrderWithOrderState(int orderId)
         {
             return _dbSet.Include(order => order.OrderState)
@@ -31,6 +38,14 @@ namespace Application.Infrastructure.Repositories.Orders
             return _dbSet.Include(order => order.OrderState)
                 .Where(order => order.Name.ToLower().Contains(name))
                 .FirstOrDefaultAsync();
+        }
+
+        public Task<List<Order>> SearchOrdersByDate(DateOnly dateOnly)
+        {
+            return _dbSet.Include(order => order.OrderState)
+                .Where(order => order.CreatedDateUtc.Day == dateOnly.Day && 
+                order.CreatedDateUtc.Month == dateOnly.Month && order.CreatedDateUtc.Year == dateOnly.Year)
+                .ToListAsync();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using Application.Features.AddProducts;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.SearchProductsByName
 {
@@ -13,7 +15,10 @@ namespace Application.Features.SearchProductsByName
             _mediator = mediator;
         }
 
-        [HttpGet("search")]
+        [HttpGet("search/name", Name = "SearchProductByName")]
+        [SwaggerOperation(Summary = "Searches for a product with the provided name")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Request Successful", typeof(ProductDto))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Product with matching name was not found")]
         public async Task<IActionResult> SearchProductByName([FromQuery] string name)
         {
             var query = new SearchProductByName.Query { Name = name };

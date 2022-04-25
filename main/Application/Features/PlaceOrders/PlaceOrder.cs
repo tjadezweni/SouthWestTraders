@@ -3,6 +3,7 @@ using Application.Infrastructure.Entities;
 using Application.Infrastructure.Repositories.Orders;
 using Application.Infrastructure.Repositories.OrderStates;
 using Application.Infrastructure.Repositories.Stocks;
+using Application.Infrastructure.SeedWork;
 using MediatR;
 
 namespace Application.Features.PlaceOrders
@@ -12,22 +13,22 @@ namespace Application.Features.PlaceOrders
         public record Command : IRequest<Unit>
         {
             public int ProductId { get; set; }
-            public string OrderName { get; set; } = null!;
-            public int Quantity { get; set; }
+            public string Name { get; set; } = null!;
+            public int Quantity { get; set; } = 0;
         }
 
         public class Handler : IRequestHandler<Command>
         {
             private readonly IStockRepository _stockRepository;
-            private readonly IOrderStateRepository _orderStateRepository;
             private readonly IOrderRepository _orderRepository;
+            private readonly IUnitOfWork _unitOfWork;
 
             public Handler(IStockRepository stockRepository, 
-                IOrderStateRepository orderStateRepository,
+                IUnitOfWork unitOfWork,
                 IOrderRepository orderRepository)
             {
                 _stockRepository = stockRepository;
-                _orderStateRepository = orderStateRepository;
+                _unitOfWork = unitOfWork;
                 _orderRepository = orderRepository;
             }
 
@@ -40,12 +41,13 @@ namespace Application.Features.PlaceOrders
                 }
                 if (stock.AvailableStock < request.Quantity)
                 {
-                    throw new Exception("Cannot place order for quantity more than available stock");
+                    throw new InvalidStockAmountException();
                 }
                 stock.AvailableStock -= request.Quantity;
                 await _stockRepository.UpdateAsync(stock);
-                var order = new Order { Name = request.OrderName, Quantity = request.Quantity, OrderStateId = 1 };
+                var order = new Order { Name = request.Name, Quantity = request.Quantity, OrderStateId = 1, ProductId = request.ProductId };
                 await _orderRepository.AddAsync(order);
+                await _unitOfWork.CompleteAsync();
                 return Unit.Value;
             }
         }

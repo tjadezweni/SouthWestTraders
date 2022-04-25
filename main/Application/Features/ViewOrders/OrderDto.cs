@@ -1,6 +1,6 @@
 ﻿namespace Application.Features.ViewOrders
 {
-    public class ViewOrderDto
+    public class OrderDto
     {
         public int OrderId { get; set; }
         public int ProductId { get; set; }

@@ -5,14 +5,14 @@ using MediatR;
 
 namespace Application.Features.SearchOrderByDate
 {
-    public class SearchOrderByDate
+    public class SearchOrdersByDate
     {
-        public record Query : IRequest<ViewOrderDto>
+        public record Query : IRequest<IEnumerable<OrderDto>>
         {
-            public DateTime CreatedDate { get; set; }
+            public DateOnly CreatedDate { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, ViewOrderDto>
+        public class Handler : IRequestHandler<Query, IEnumerable<OrderDto>>
         {
             private readonly IOrderRepository _orderRepository;
 
@@ -21,14 +21,10 @@ namespace Application.Features.SearchOrderByDate
                 _orderRepository = orderRepository;
             }
 
-            public async Task<ViewOrderDto> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<OrderDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var order = await _orderRepository.SearchOrderByDate(request.CreatedDate);
-                if (order is null)
-                {
-                    throw new OrderNotFoundException(request.CreatedDate);
-                }
-                var viewOrderDto = new ViewOrderDto
+                var ordersList = await _orderRepository.SearchOrdersByDate(request.CreatedDate);
+                var ordersDtoList = ordersList.Select(order => new OrderDto
                 {
                     OrderId = order.OrderId,
                     ProductId = order.ProductId,
@@ -36,8 +32,8 @@ namespace Application.Features.SearchOrderByDate
                     Quantity = order.Quantity,
                     CreatedDateUtc = order.CreatedDateUtc,
                     OrderState = order.OrderState.State
-                };
-                return viewOrderDto;
+                });
+                return ordersDtoList;
             }
         }
     }

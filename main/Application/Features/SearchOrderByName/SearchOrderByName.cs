@@ -7,12 +7,12 @@ namespace Application.Features.SearchOrderByName
 {
     public class SearchOrderByName
     {
-        public record Query : IRequest<ViewOrderDto>
+        public record Query : IRequest<OrderDto>
         {
             public string Name { get; set; } = null!;
         }
 
-        public class Handler : IRequestHandler<Query, ViewOrderDto>
+        public class Handler : IRequestHandler<Query, OrderDto>
         {
             private readonly IOrderRepository _orderRepository;
 
@@ -21,15 +21,14 @@ namespace Application.Features.SearchOrderByName
                 _orderRepository = orderRepository;
             }
 
-            public async Task<ViewOrderDto> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<OrderDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var searchName = request.Name.ToLower();
-                var order = await _orderRepository.SearchOrderByName(searchName);
+                var order = await _orderRepository.SearchOrderByName(request.Name);
                 if (order is null)
                 {
-                    throw new OrderNotFoundException(searchName);
+                    throw new OrderNotFoundException(request.Name);
                 }
-                var viewOrderDto = new ViewOrderDto
+                var viewOrderDto = new OrderDto
                 {
                     OrderId = order.OrderId,
                     ProductId = order.ProductId,

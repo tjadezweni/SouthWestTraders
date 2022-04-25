@@ -1,5 +1,6 @@
 using Application.Extensions;
 using MediatR;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,13 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(
+    c =>
+    {
+        c.EnableAnnotations();
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "SouthWestTradersAPI", Version = "v1" });
+        c.CustomSchemaIds(x => x.FullName);
+    });
 
 var app = builder.Build();
 

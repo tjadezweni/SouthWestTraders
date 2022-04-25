@@ -1,5 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Infrastructure.Repositories.Products;
+using Application.Infrastructure.SeedWork;
 using MediatR;
 
 namespace Application.Features.RemoveProducts
@@ -14,10 +15,13 @@ namespace Application.Features.RemoveProducts
         public class Handler : IRequestHandler<Command>
         {
             private readonly IProductRepository _productRepository;
+            private readonly IUnitOfWork _unitOfWork;
 
-            public Handler(IProductRepository productRepository)
+            public Handler(IProductRepository productRepository,
+                IUnitOfWork unitOfWork)
             {
                 _productRepository = productRepository;
+                _unitOfWork = unitOfWork;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
@@ -28,6 +32,7 @@ namespace Application.Features.RemoveProducts
                     throw new ProductNotFoundException(request.ProductId);
                 }
                 await _productRepository.DeleteAsync(product);
+                await _unitOfWork.CompleteAsync();
                 return Unit.Value;
             }
         }

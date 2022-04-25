@@ -1,6 +1,7 @@
 ﻿using Application.Exceptions;
 using Application.Infrastructure.Repositories.Orders;
 using Application.Infrastructure.Repositories.Stocks;
+using Application.Infrastructure.SeedWork;
 using MediatR;
 
 namespace Application.Features.CancelOrders
@@ -16,12 +17,15 @@ namespace Application.Features.CancelOrders
         {
             private readonly IStockRepository _stockRepository;
             private readonly IOrderRepository _orderRepository;
+            private readonly IUnitOfWork _unitOfWork;
 
             public Handler(IStockRepository stockRepository,
-                IOrderRepository orderRepository)
+                IOrderRepository orderRepository,
+                IUnitOfWork unitOfWork)
             {
                 _stockRepository = stockRepository;
                 _orderRepository = orderRepository;
+                _unitOfWork = unitOfWork;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
@@ -36,6 +40,7 @@ namespace Application.Features.CancelOrders
                 await _stockRepository.UpdateAsync(stock);
                 order.OrderStateId = 2;
                 await _orderRepository.UpdateAsync(order);
+                await _unitOfWork.CompleteAsync();
                 return Unit.Value;
             }
         }

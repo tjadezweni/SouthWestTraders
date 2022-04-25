@@ -1,10 +1,11 @@
-﻿using MediatR;
+﻿using Application.Features.AddProducts;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.ViewProductsList
 {
     [Route("api/products")]
-    [ApiController]
     public class ViewProductsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -14,7 +15,9 @@ namespace Application.Features.ViewProductsList
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "ViewProducts")]
+        [SwaggerOperation(Summary = "Gets a list of all the products in the warehouse")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Request Successful", typeof(List<ProductDto>))]
         public async Task<IActionResult> ViewProducts()
         {
             var query = new ViewProducts.Query();

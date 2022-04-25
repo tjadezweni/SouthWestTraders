@@ -7,31 +7,28 @@ namespace Application.Features.ViewOrders
 {
     public static class ViewOrder
     {
-        public record Query : IRequest<ViewOrderDto>
+        public record Query : IRequest<OrderDto>
         {
             public int OrderId { get; set; }
         }
 
-        public class Handler : IRequestHandler<Query, ViewOrderDto>
+        public class Handler : IRequestHandler<Query, OrderDto>
         {
             private readonly IOrderRepository _orderRepository;
-            private readonly IOrderStateRepository _orderStateRepository;
 
-            public Handler(IOrderRepository orderRepository,
-                IOrderStateRepository orderStateRepository)
+            public Handler(IOrderRepository orderRepository)
             {
                 _orderRepository = orderRepository;
-                _orderStateRepository = orderStateRepository;
             }
 
-            public async Task<ViewOrderDto> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<OrderDto> Handle(Query request, CancellationToken cancellationToken)
             {
-                var order = await _orderRepository.GetAsync(order => order.OrderId == request.OrderId);
+                var order = await _orderRepository.GetOrderByIdEager(request.OrderId);
                 if (order is null)
                 {
                     throw new OrderNotFoundException(request.OrderId);
                 }
-                var orderDto = new ViewOrderDto
+                var orderDto = new OrderDto
                 {
                     OrderId = order.OrderId,
                     ProductId = order.ProductId,

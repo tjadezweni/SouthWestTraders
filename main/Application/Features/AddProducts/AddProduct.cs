@@ -1,6 +1,8 @@
-﻿using Application.Infrastructure.Entities;
+﻿using Application.Exceptions;
+using Application.Infrastructure.Entities;
 using Application.Infrastructure.Repositories.Products;
 using Application.Infrastructure.Repositories.Stocks;
+using Application.Infrastructure.SeedWork;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -28,21 +30,32 @@ namespace Application.Features.AddProducts
 
         public class Handler : IRequestHandler<Command, ProductDto>
         {
+            private readonly IUnitOfWork _unitOfWork;
             private readonly IProductRepository _productRepository;
-            private readonly IStockRepository _stockRepository;
+            private IStockRepository _stockRepository;
 
-            public Handler(IProductRepository productRepository, IStockRepository stockRepository)
+            public Handler(IUnitOfWork unitOfWork,
+                IProductRepository productRepository,
+                IStockRepository stockRepository)
             {
+                _unitOfWork = unitOfWork;
                 _productRepository = productRepository;
                 _stockRepository = stockRepository;
             }
 
             public async Task<ProductDto> Handle(Command request, CancellationToken cancellationToken)
             {
+                var existingProduct = await _productRepository.GetAsync(product => product.Name == request.Name);
+                if (existingProduct is not null)
+                {
+                    throw new ProductFoundException(request.Name);
+                }
                 var product = new Product { Name = request.Name, Description = request.Description, Price = request.Price };
                 await _productRepository.AddAsync(product);
+                await _unitOfWork.CompleteAsync();
                 var stock = new Stock { ProductId = product.ProductId, AvailableStock = 0 };
                 await _stockRepository.AddAsync(stock);
+                await _unitOfWork.CompleteAsync();
                 var productDto = new ProductDto { ProductId = product.ProductId, Name = product.Name, 
                     Description = product.Description, Price = product.Price };
                 return productDto;

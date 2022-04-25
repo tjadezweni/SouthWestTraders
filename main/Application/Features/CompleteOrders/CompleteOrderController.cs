@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.Features.CompleteOrders
 {
@@ -15,8 +16,11 @@ namespace Application.Features.CompleteOrders
             _mediator = mediator;
         }
 
-        [HttpPut("/complete")]
-        public async Task<IActionResult> PlaceOrder([FromBody] CompleteOrder.Command command)
+        [HttpPut("/complete", Name = "CompleteOrder")]
+        [SwaggerOperation(Summary = "Completes an order for a product specified")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Request Successful")]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Product with matching id was not found")]
+        public async Task<IActionResult> CompleteOrder([FromBody] CompleteOrder.Command command)
         {
             await _mediator.Send(command);
             return Ok();
