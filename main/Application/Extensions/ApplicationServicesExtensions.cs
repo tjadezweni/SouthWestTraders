@@ -21,7 +21,7 @@ namespace Application.Extensions
             });
         }
 
-        public static void RegisterRepositories(this IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IStockRepository, StockRepository>();

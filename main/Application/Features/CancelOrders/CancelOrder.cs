@@ -3,6 +3,7 @@ using Application.Infrastructure.Repositories.Orders;
 using Application.Infrastructure.Repositories.Stocks;
 using Application.Infrastructure.SeedWork;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Features.CancelOrders
 {
@@ -10,6 +11,7 @@ namespace Application.Features.CancelOrders
     {
         public record Command : IRequest<Unit>
         {
+            [Required]
             public int OrderId { get; set; }
         }
 

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Application.ActionFilters;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -20,6 +21,8 @@ namespace Application.Features.CompleteOrders
         [SwaggerOperation(Summary = "Completes an order for a product specified")]
         [SwaggerResponse(StatusCodes.Status200OK, "Request Successful")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Product with matching id was not found")]
+
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CompleteOrder([FromBody] CompleteOrder.Command command)
         {
             await _mediator.Send(command);

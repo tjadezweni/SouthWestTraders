@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Application.ActionFilters;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -18,6 +19,8 @@ namespace Application.Features.PlaceOrders
         [SwaggerOperation(Summary = "Places an order for a product specified")]
         [SwaggerResponse(StatusCodes.Status201Created, "Request Successful")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Product with matching id was not found")]
+
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> PlaceOrder([FromBody] PlaceOrder.Command command)
         {
             await _mediator.Send(command);

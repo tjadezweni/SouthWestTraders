@@ -2,6 +2,7 @@
 using Application.Infrastructure.Repositories.Orders;
 using Application.Infrastructure.SeedWork;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Features.CompleteOrders
 {
@@ -9,6 +10,7 @@ namespace Application.Features.CompleteOrders
     {
         public record Command : IRequest<Unit>
         {
+            [Required]
             public int OrderId { get; set; }
         }
 

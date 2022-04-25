@@ -5,6 +5,7 @@ using Application.Infrastructure.Repositories.OrderStates;
 using Application.Infrastructure.Repositories.Stocks;
 using Application.Infrastructure.SeedWork;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Features.PlaceOrders
 {
@@ -12,9 +13,15 @@ namespace Application.Features.PlaceOrders
     {
         public record Command : IRequest<Unit>
         {
+            [Required]
             public int ProductId { get; set; }
+            [Required]
+            [MinLength(3)]
+            [MaxLength(25)]
             public string Name { get; set; } = null!;
-            public int Quantity { get; set; } = 0;
+            [Required]
+            [Range(1, int.MaxValue)]
+            public int Quantity { get; set; }
         }
 
         public class Handler : IRequestHandler<Command>

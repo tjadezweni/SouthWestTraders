@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.RegisterDbContext(builder.Configuration);
-builder.Services.RegisterRepositories();
+builder.Services.RegisterServices();
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
@@ -30,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();
 
