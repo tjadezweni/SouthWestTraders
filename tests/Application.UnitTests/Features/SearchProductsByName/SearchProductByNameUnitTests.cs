@@ -28,7 +28,7 @@ namespace Application.UnitTests.Features.SearchProductsByName
             var mockProductRepository = new Mock<IProductRepository>();
             var cancellationToken = new CancellationToken();
             var query = new SearchProductByName.Query { Name = name };
-            mockProductRepository.Setup(mock => mock.GetAsync(It.IsAny<Expression<Func<Product, bool>>>()))
+            mockProductRepository.Setup(mock => mock.SearchProductByName(It.IsAny<string>()))
                 .ReturnsAsync(productTest);
 
             var handler = new SearchProductByName.Handler(mockProductRepository.Object);
@@ -37,7 +37,7 @@ namespace Application.UnitTests.Features.SearchProductsByName
             var product = await handler.Handle(query, cancellationToken);
 
             // Assert
-            mockProductRepository.Verify(mock => mock.GetAsync(It.IsAny<Expression<Func<Product, bool>>>()), Times.Once());
+            mockProductRepository.Verify(mock => mock.SearchProductByName(It.IsAny<string>()), Times.Once());
             Assert.NotNull(product);
             Assert.Same(productName, product.Name);
         }
@@ -51,7 +51,7 @@ namespace Application.UnitTests.Features.SearchProductsByName
             var mockProductRepository = new Mock<IProductRepository>();
             var cancellationToken = new CancellationToken();
             var query = new SearchProductByName.Query { Name = "Copenhagen" };
-            mockProductRepository.Setup(mock => mock.GetAsync(It.IsAny<Expression<Func<Product, bool>>>()))
+            mockProductRepository.Setup(mock => mock.SearchProductByName(It.IsAny<string>()))
                 .ReturnsAsync(productTest);
 
             var handler = new SearchProductByName.Handler(mockProductRepository.Object);
@@ -61,7 +61,7 @@ namespace Application.UnitTests.Features.SearchProductsByName
 
             // Assert
             await Assert.ThrowsAsync<ProductNotFoundException>(action);
-            mockProductRepository.Verify(mock => mock.GetAsync(It.IsAny<Expression<Func<Product, bool>>>()), Times.Once());
+            mockProductRepository.Verify(mock => mock.SearchProductByName(It.IsAny<string>()));
         }
     }
 }

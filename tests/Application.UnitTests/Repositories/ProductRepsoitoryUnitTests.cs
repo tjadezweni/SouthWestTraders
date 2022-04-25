@@ -29,6 +29,7 @@ namespace Application.UnitTests.Repositories
 
             // Act
             var product = await productRepository.AddAsync(productToBeAdded);
+            await dbContext.SaveChangesAsync();
 
             // Assert
             Assert.NotNull(product);
@@ -56,6 +57,7 @@ namespace Application.UnitTests.Repositories
             
             // Act
             var updatedProduct = await productRepository.UpdateAsync(product);
+            await dbContext.SaveChangesAsync();
 
             // Assert
             Assert.NotNull(updatedProduct);
@@ -77,6 +79,7 @@ namespace Application.UnitTests.Repositories
 
             // Act
             await productRepository.DeleteAsync(productToBeDeleted);
+            await dbContext.SaveChangesAsync();
 
             var product = dbContext.Products.Where(product => product.ProductId == productToBeDeleted.ProductId).FirstOrDefault();
 

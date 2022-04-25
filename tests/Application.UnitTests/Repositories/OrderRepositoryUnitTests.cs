@@ -33,6 +33,7 @@ namespace Application.UnitTests.Repositories
 
             // Act
             var order = await orderRepository.AddAsync(orderToBeAdded);
+            await dbContext.SaveChangesAsync();
 
             // Assert
             Assert.NotNull(order);
@@ -57,6 +58,7 @@ namespace Application.UnitTests.Repositories
 
             // Act
             var updatedorder = await orderRepository.UpdateAsync(order);
+            await dbContext.SaveChangesAsync();
 
             // Assert
             Assert.NotNull(updatedorder);
@@ -77,6 +79,7 @@ namespace Application.UnitTests.Repositories
 
             // Act
             await orderRepository.DeleteAsync(orderToBeDeleted);
+            await dbContext.SaveChangesAsync();
 
             var order = dbContext.Orders.Where(order => order.OrderId == orderToBeDeleted.OrderId).FirstOrDefault();
 

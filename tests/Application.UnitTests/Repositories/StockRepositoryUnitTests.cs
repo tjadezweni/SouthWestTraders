@@ -32,6 +32,7 @@ namespace Application.UnitTests.Repositories
 
             // Act
             var stock = await stockRepository.AddAsync(stockToBeAdded);
+            await dbContext.SaveChangesAsync();
 
             // Assert
             Assert.NotNull(stock);
@@ -56,6 +57,7 @@ namespace Application.UnitTests.Repositories
 
             // Act
             var updatedstock = await stockRepository.UpdateAsync(stock);
+            await dbContext.SaveChangesAsync();
 
             // Assert
             Assert.NotNull(updatedstock);
@@ -76,6 +78,7 @@ namespace Application.UnitTests.Repositories
 
             // Act
             await stockRepository.DeleteAsync(stockToBeDeleted);
+            await dbContext.SaveChangesAsync();
 
             var stock = dbContext.Stocks.Where(stock => stock.StockId == stockToBeDeleted.StockId).FirstOrDefault();
 

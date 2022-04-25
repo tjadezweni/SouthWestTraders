@@ -35,7 +35,7 @@ namespace Application.UnitTests.Features.AddProducts
             // Assert
             mockProductRepository.Verify(mock => mock.AddAsync(It.IsAny<Product>()), Times.Once());
             mockStockRepository.Verify(mock => mock.AddAsync(It.IsAny<Stock>()), Times.Once());
-            mockUnitOfWork.Verify(mock => mock.CompleteAsync(), Times.Once());
+            mockUnitOfWork.Verify(mock => mock.CompleteAsync(), Times.Exactly(2));
             Assert.NotNull(product);
             Assert.Same(name, product.Name);
             Assert.Same(description, product.Description);

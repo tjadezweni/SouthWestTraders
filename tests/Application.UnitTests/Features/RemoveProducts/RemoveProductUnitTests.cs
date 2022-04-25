@@ -35,6 +35,7 @@ namespace Application.UnitTests.Features.RemoveProducts
             mockUnitOfWork.Verify(mock => mock.CompleteAsync(), Times.Once());
             Assert.Equal(Unit.Value, unitValue);
             mockProductRepository.Verify(mock => mock.GetAsync(It.IsAny<Expression<Func<Product, bool>>>()), Times.Once());
+            mockUnitOfWork.Verify(mock => mock.CompleteAsync(), Times.Once());
         }
 
         [Fact]
@@ -55,6 +56,7 @@ namespace Application.UnitTests.Features.RemoveProducts
 
             // Assert
             await Assert.ThrowsAsync<ProductNotFoundException>(action);
+            mockUnitOfWork.Verify(mock => mock.CompleteAsync(), Times.Never());
         }
     }
 }
