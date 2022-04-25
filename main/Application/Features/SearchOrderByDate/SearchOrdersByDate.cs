@@ -2,6 +2,7 @@
 using Application.Features.ViewOrders;
 using Application.Infrastructure.Repositories.Orders;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Features.SearchOrderByDate
 {
@@ -9,7 +10,14 @@ namespace Application.Features.SearchOrderByDate
     {
         public record Query : IRequest<IEnumerable<OrderDto>>
         {
-            public DateOnly CreatedDate { get; set; }
+            [Required]
+            [Range(1, 31)]
+            public int Day { get; set; }
+            [Required]
+            [Range(1, 12)]
+            public int Month { get; set; }
+            [Range(2022, int.MaxValue)]
+            public int Year { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, IEnumerable<OrderDto>>
@@ -23,7 +31,9 @@ namespace Application.Features.SearchOrderByDate
 
             public async Task<IEnumerable<OrderDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var ordersList = await _orderRepository.SearchOrdersByDate(request.CreatedDate);
+
+
+                var ordersList = await _orderRepository.SearchOrdersByDate(request.Day, request.Month, request.Year);
                 var ordersDtoList = ordersList.Select(order => new OrderDto
                 {
                     OrderId = order.OrderId,
@@ -38,3 +48,4 @@ namespace Application.Features.SearchOrderByDate
         }
     }
 }
+

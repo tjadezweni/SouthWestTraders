@@ -34,6 +34,10 @@ namespace Application.Features.CompleteOrders
                 {
                     throw new OrderNotFoundException(request.OrderId);
                 }
+                if (order.OrderStateId == (int)OrderState.CANCELLED)
+                {
+                    throw new OrderCancelledException();
+                }
                 order.OrderStateId = (int)OrderState.COMPLETED;
                 await _orderRepository.UpdateAsync(order);
                 await _unitOfWork.CompleteAsync();

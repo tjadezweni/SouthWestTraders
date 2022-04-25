@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Application.Exceptions;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -22,7 +23,7 @@ namespace Application.Features.DecreaseStocks
         public async Task<IActionResult> DecreaseStock(int productId, int amount)
         {
             if (amount <= 0)
-                return BadRequest("The amount provided was not above zero");
+                throw new InvalidStockAmountException();
             var command = new DecreaseStock.Command { ProductId = productId, StockAmount = amount };
             await _mediator.Send(command);
             return Ok();

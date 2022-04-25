@@ -8,6 +8,6 @@ namespace Application.Infrastructure.Entities
         public int ProductId { get; set; }
         public int AvailableStock { get; set; }
 
-        public virtual Product Product { get; set; } = null!;
+        public virtual Product? Product { get; set; }
     }
 }

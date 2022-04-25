@@ -49,18 +49,26 @@ namespace Application.Extensions
                     break;
             }
             context.Response.StatusCode = statusCode;
+            context.Response.ContentType = "application/json";
             var responseText = new ErrorDetails()
             {
                 Message = message
             }.ToString();
             await context.Response.WriteAsync(responseText);
         }
+
+        public class ErrorDetails
+        {
+            public string Message { get; set; } = null!;
+
+            public override string ToString()
+            {
+                return "{ \"message\": \"" + Message + "\"}";
+            }
+        }
     }
 
-    internal class ErrorDetails
-    {
-        public string Message { get; set; } = null!;
-    }
+    
 
     
 }

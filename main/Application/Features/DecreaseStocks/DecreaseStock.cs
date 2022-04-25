@@ -35,7 +35,7 @@ namespace Application.Features.DecreaseStocks
                 int newStockAmount = stock.AvailableStock - request.StockAmount;
                 if (newStockAmount < 0)
                 {
-                    throw new Exception("Stock cannot be less than zero");
+                    throw new InvalidStockAmountException();
                 }
                 stock.AvailableStock = newStockAmount;
                 await _stockRepository.UpdateAsync(stock);

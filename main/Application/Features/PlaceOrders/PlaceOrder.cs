@@ -42,11 +42,18 @@ namespace Application.Features.PlaceOrders
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
+                var existingOrder = await _orderRepository.GetAsync(order => order.Name == request.Name);
+                if (existingOrder is not null)
+                {
+                    throw new OrderFoundException(request.Name);
+                }
+
                 var stock = await _stockRepository.GetStockWithProductId(request.ProductId);
                 if (stock is null)
                 {
                     throw new ProductNotFoundException(request.ProductId);
                 }
+
                 if (stock.AvailableStock < request.Quantity)
                 {
                     throw new InvalidStockAmountException();

@@ -2,6 +2,7 @@
 using Application.Infrastructure.Repositories.Stocks;
 using Application.Infrastructure.SeedWork;
 using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.Features.IncreaseStocks
 {

@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Application.ActionFilters
 {
-    public class ValidationFilterAttribute : IActionFilter
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class ValidationFilterAttribute : ActionFilterAttribute
     {
-        public void OnActionExecuted(ActionExecutedContext context)
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
             if (context.ModelState.IsValid)
             {
@@ -14,7 +15,7 @@ namespace Application.ActionFilters
             context.Result = new UnprocessableEntityObjectResult(context.ModelState);
         }
 
-        public void OnActionExecuting(ActionExecutingContext context)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
         }
     }
