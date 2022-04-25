@@ -1,6 +1,6 @@
 ﻿namespace Application.Exceptions
 {
-    public class NotFoundException : Exception
+    public class NotFoundException : ApiException
     {
         protected NotFoundException(string entityType, object entityProperty)
             : base(DefaultMessage(entityType, entityProperty))

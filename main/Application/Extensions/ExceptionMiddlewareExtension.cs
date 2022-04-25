@@ -33,16 +33,16 @@ namespace Application.Extensions
             var message = "Internal Server Error";
             switch (exception)
             {
-                case InvalidStockAmountException:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    message = exception.Message;
-                    break;
                 case NotFoundException:
                     statusCode = StatusCodes.Status404NotFound;
                     message = exception.Message;
                     break;
                 case FoundException:
                     statusCode = StatusCodes.Status409Conflict;
+                    message = exception.Message;
+                    break;
+                case ApiException:
+                    statusCode = StatusCodes.Status400BadRequest;
                     message = exception.Message;
                     break;
                 default:

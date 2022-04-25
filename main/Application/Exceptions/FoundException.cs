@@ -1,6 +1,6 @@
 ﻿namespace Application.Exceptions
 {
-    public class FoundException : Exception
+    public class FoundException : ApiException
     {
         protected FoundException(string entityType, object entityProperty)
             : base(DefaultMessage(entityType, entityProperty))

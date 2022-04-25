@@ -1,6 +1,7 @@
 ﻿using Application.Exceptions;
 using Application.Infrastructure.Repositories.Orders;
 using Application.Infrastructure.SeedWork;
+using Application.Models;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
@@ -33,7 +34,7 @@ namespace Application.Features.CompleteOrders
                 {
                     throw new OrderNotFoundException(request.OrderId);
                 }
-                order.OrderStateId = 3;
+                order.OrderStateId = (int)OrderState.COMPLETED;
                 await _orderRepository.UpdateAsync(order);
                 await _unitOfWork.CompleteAsync();
                 return Unit.Value;

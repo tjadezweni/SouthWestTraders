@@ -1,9 +1,9 @@
 ﻿namespace Application.Exceptions
 {
-    public class InvalidStockAmountException : Exception
+    public class InvalidStockAmountException : ApiException
     {
         public InvalidStockAmountException()
-            : base()
+            : base(DefaultMessage())
         {
 
         }
