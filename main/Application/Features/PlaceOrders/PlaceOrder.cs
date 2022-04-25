@@ -1,11 +1,12 @@
 ﻿using Application.Exceptions;
 using Application.Infrastructure.Entities;
 using Application.Infrastructure.Repositories.Orders;
-using Application.Infrastructure.Repositories.OrderStates;
 using Application.Infrastructure.Repositories.Stocks;
 using Application.Infrastructure.SeedWork;
+using Application.Models;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
+using OrderState = Application.Models.OrderState;
 
 namespace Application.Features.PlaceOrders
 {
@@ -52,7 +53,7 @@ namespace Application.Features.PlaceOrders
                 }
                 stock.AvailableStock -= request.Quantity;
                 await _stockRepository.UpdateAsync(stock);
-                var order = new Order { Name = request.Name, Quantity = request.Quantity, OrderStateId = 1, ProductId = request.ProductId };
+                var order = new Order { Name = request.Name, Quantity = request.Quantity, OrderStateId = (int)OrderState.RESERVED, ProductId = request.ProductId };
                 await _orderRepository.AddAsync(order);
                 await _unitOfWork.CompleteAsync();
                 return Unit.Value;

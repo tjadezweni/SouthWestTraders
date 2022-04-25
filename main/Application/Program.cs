@@ -1,3 +1,4 @@
+using Application.ActionFilters;
 using Application.Extensions;
 using MediatR;
 using Microsoft.OpenApi.Models;
@@ -10,6 +11,8 @@ builder.Services.RegisterDbContext(builder.Configuration);
 builder.Services.RegisterServices();
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+
+builder.Services.AddScoped<ValidationFilterAttribute>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

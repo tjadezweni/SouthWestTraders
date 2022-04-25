@@ -2,6 +2,7 @@
 using Application.Infrastructure.Repositories.Orders;
 using Application.Infrastructure.Repositories.Stocks;
 using Application.Infrastructure.SeedWork;
+using Application.Models;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
@@ -37,10 +38,14 @@ namespace Application.Features.CancelOrders
                 {
                     throw new OrderNotFoundException(request.OrderId);
                 }
+                if (order.OrderStateId == (int)OrderState.COMPLETED)
+                {
+                    throw new OrderCompleteException();
+                }
                 var stock = await _stockRepository.GetStockWithProductId(order.ProductId);
                 stock.AvailableStock += order.Quantity;
                 await _stockRepository.UpdateAsync(stock);
-                order.OrderStateId = 2;
+                order.OrderStateId = (int)OrderState.CANCELLED;
                 await _orderRepository.UpdateAsync(order);
                 await _unitOfWork.CompleteAsync();
                 return Unit.Value;
