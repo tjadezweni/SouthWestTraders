@@ -2,7 +2,7 @@
 
 namespace Application.Infrastructure.Entities
 {
-    public partial class Product : BaseEntity
+    public class Product : BaseEntity
     {
         public Product()
         {

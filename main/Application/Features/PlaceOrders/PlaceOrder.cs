@@ -53,12 +53,7 @@ namespace Application.Features.PlaceOrders
                 {
                     throw new ProductNotFoundException(request.ProductId);
                 }
-
-                if (stock.AvailableStock < request.Quantity)
-                {
-                    throw new InvalidStockAmountException();
-                }
-                stock.AvailableStock -= request.Quantity;
+                stock.DecreaseStockBy(request.Quantity);
                 await _stockRepository.UpdateAsync(stock);
                 var order = new Order { Name = request.Name, Quantity = request.Quantity, OrderStateId = (int)OrderState.RESERVED, ProductId = request.ProductId };
                 await _orderRepository.AddAsync(order);

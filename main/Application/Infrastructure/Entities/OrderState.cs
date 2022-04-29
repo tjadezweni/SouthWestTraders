@@ -2,7 +2,7 @@
 
 namespace Application.Infrastructure.Entities
 {
-    public partial class OrderState : BaseEntity
+    public class OrderState : BaseEntity
     {
         public OrderState()
         {

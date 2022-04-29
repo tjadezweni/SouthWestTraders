@@ -2,7 +2,7 @@
 
 namespace Application.Infrastructure.Entities
 {
-    public partial class Order : BaseEntity
+    public class Order : BaseEntity
     {
         public int OrderId { get; set; }
         public int ProductId { get; set; }

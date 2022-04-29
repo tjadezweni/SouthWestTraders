@@ -33,8 +33,7 @@ namespace Application.Features.IncreaseStocks
                 {
                     throw new ProductNotFoundException(request.ProductId);
                 }
-                int newStockAmount = stock.AvailableStock + request.StockAmount;
-                stock.AvailableStock = newStockAmount;
+                stock.IncreaseStockBy(request.StockAmount);
                 await _stockRepository.UpdateAsync(stock);
                 await _unitOfWork.CompleteAsync();
                 return Unit.Value;

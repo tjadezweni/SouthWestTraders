@@ -32,12 +32,7 @@ namespace Application.Features.DecreaseStocks
                 {
                     throw new ProductNotFoundException(request.ProductId);
                 }
-                int newStockAmount = stock.AvailableStock - request.StockAmount;
-                if (newStockAmount < 0)
-                {
-                    throw new InvalidStockAmountException();
-                }
-                stock.AvailableStock = newStockAmount;
+                stock.DecreaseStockBy(request.StockAmount);
                 await _stockRepository.UpdateAsync(stock);
                 await _unitOfWork.CompleteAsync();
                 return Unit.Value;

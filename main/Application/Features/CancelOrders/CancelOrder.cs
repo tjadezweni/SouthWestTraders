@@ -43,7 +43,7 @@ namespace Application.Features.CancelOrders
                     throw new OrderCompleteException();
                 }
                 var stock = await _stockRepository.GetStockWithProductId(order.ProductId);
-                stock.AvailableStock += order.Quantity;
+                stock!.IncreaseStockBy(order.Quantity);
                 await _stockRepository.UpdateAsync(stock);
                 order.OrderStateId = (int)OrderState.CANCELLED;
                 await _orderRepository.UpdateAsync(order);

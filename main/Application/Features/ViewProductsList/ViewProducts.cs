@@ -23,8 +23,8 @@ namespace Application.Features.ViewProductsList
             public async Task<IEnumerable<ProductDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var productsList = await _productRepository.ListAsync(product => true);
-                var productsDtoList = productsList.Select(product => new ProductDto { ProductId = product.ProductId, Name = product.Name, 
-                    Description = product.Description, Price = product.Price });
+                var productsDtoList = productsList.Select(product => new ProductDto { ProductId = product.ProductId, 
+                    Name = product.Name, Description = product.Description, Price = product.Price });
                 return productsDtoList;
             }
         }

@@ -22,8 +22,6 @@ namespace Application.Features.DecreaseStocks
         [SwaggerResponse(StatusCodes.Status400BadRequest, "The amount provided was not above zero")]
         public async Task<IActionResult> DecreaseStock(int productId, int amount)
         {
-            if (amount <= 0)
-                throw new InvalidStockAmountException();
             var command = new DecreaseStock.Command { ProductId = productId, StockAmount = amount };
             await _mediator.Send(command);
             return Ok();
