@@ -1,4 +1,5 @@
-﻿using Application.Infrastructure;
+﻿using Application.Cache;
+using Application.Infrastructure;
 using Application.Infrastructure.Repositories.Orders;
 using Application.Infrastructure.Repositories.OrderStates;
 using Application.Infrastructure.Repositories.Products;
@@ -28,6 +29,8 @@ namespace Application.Extensions
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderStateRepository, OrderStateRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddDistributedMemoryCache();
+            services.AddScoped<IDistributedCacheRepository, DistributedCacheRepository>();
         }
     }
 }
